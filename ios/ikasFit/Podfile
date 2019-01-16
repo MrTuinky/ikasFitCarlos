@@ -8,5 +8,6 @@ target 'ikasFit' do
   # Pods for ikasFit
 
   pod 'Firebase/Core'
+  pod 'Firebase/Firestore'
 
 end

@@ -9,6 +9,7 @@
 import UIKit
 import HealthKit
 import HealthKitUI
+import Firebase
 
 let healthStore = HKHealthStore()
 
@@ -34,6 +35,10 @@ class ViewController: UIViewController {
                 self.labelPasos.text = "\(result)"
             }
         }
+        
+        
+        
+        
         
         
     }
@@ -136,6 +141,21 @@ class ViewController: UIViewController {
             print("\(result)")
             DispatchQueue.main.async {
                 self.labelPasos.text = "\(result)"
+            }
+            
+            // Add a new document with a generated ID
+            //Fuente: https://firebase.google.com/docs/firestore/quickstart?authuser=0
+            
+            var ref: DocumentReference? = nil
+            ref = db.collection("alumnos").addDocument(data: [
+                "pasos": self.labelPasos.text
+                
+            ]) { err in
+                if let err = err {
+                    print("Error adding document: \(err)")
+                } else {
+                    print("Document added with ID: \(ref!.documentID)")
+                }
             }
         
         
