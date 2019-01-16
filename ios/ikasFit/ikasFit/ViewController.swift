@@ -28,14 +28,24 @@ class ViewController: UIViewController {
         autorizar()
         
         
+        pasosDeHoy { (result) in
+            print("\(result)")
+            DispatchQueue.main.async {
+                self.labelPasos.text = "\(result)"
+            }
+        }
+        
+        
     }
     
     
     //Botón para ir a Salud y activar que deje leer los pasos
     //Fuente https://stackoverflow.com/questions/28152526/how-do-i-open-phone-settings-when-a-button-is-clicked/52103305
     
-    @IBAction func botonAutorizar(_ sender: Any) {
-        //UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+    
+    @IBAction func botonAjustes(_ sender: Any) {
+    
+    //UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
         
         
         let alertController = UIAlertController (title: "Autorizar", message: "¿Quieres que la aplicación abra los Ajustes del iPhone?", preferredStyle: .alert)
