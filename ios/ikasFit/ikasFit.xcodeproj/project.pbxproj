@@ -9,18 +9,21 @@
 /* Begin PBXBuildFile section */
 		3D6038C6468F98C716BF76AA /* Pods_ikasFit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3A342A19609AFBDBD4AF27F0 /* Pods_ikasFit.framework */; };
 		AE9F9FDB21EF8C6200597966 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AE9F9FDA21EF8C6200597966 /* GoogleService-Info.plist */; };
+		AE9F9FDD21EFB22500597966 /* TablasTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AE9F9FDC21EFB22500597966 /* TablasTableViewController.swift */; };
 		AEB19D2921EE2E3000BE03FA /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB19D2821EE2E3000BE03FA /* AppDelegate.swift */; };
 		AEB19D2B21EE2E3000BE03FA /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEB19D2A21EE2E3000BE03FA /* ViewController.swift */; };
 		AEB19D2E21EE2E3000BE03FA /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEB19D2C21EE2E3000BE03FA /* Main.storyboard */; };
 		AEB19D3021EE2E3600BE03FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEB19D2F21EE2E3600BE03FA /* Assets.xcassets */; };
 		AEB19D3321EE2E3600BE03FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEB19D3121EE2E3600BE03FA /* LaunchScreen.storyboard */; };
 		AEB19D3F21EE588500BE03FA /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB19D3E21EE588500BE03FA /* HealthKit.framework */; };
+		AEFF866321F0893C00998193 /* ListaDePasos.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFF866221F0893C00998193 /* ListaDePasos.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		3A342A19609AFBDBD4AF27F0 /* Pods_ikasFit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ikasFit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9AABA81EC540F467B2D12F43 /* Pods-ikasFit.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ikasFit.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ikasFit/Pods-ikasFit.debug.xcconfig"; sourceTree = "<group>"; };
 		AE9F9FDA21EF8C6200597966 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AE9F9FDC21EFB22500597966 /* TablasTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TablasTableViewController.swift; sourceTree = "<group>"; };
 		AEB19D2521EE2E3000BE03FA /* ikasFit.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ikasFit.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AEB19D2821EE2E3000BE03FA /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		AEB19D2A21EE2E3000BE03FA /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -30,6 +33,7 @@
 		AEB19D3421EE2E3600BE03FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AEB19D3A21EE44FB00BE03FA /* ikasFit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ikasFit.entitlements; sourceTree = "<group>"; };
 		AEB19D3E21EE588500BE03FA /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		AEFF866221F0893C00998193 /* ListaDePasos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListaDePasos.swift; sourceTree = "<group>"; };
 		F239554E3F1929BDCE5A65C9 /* Pods-ikasFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ikasFit.release.xcconfig"; path = "Pods/Target Support Files/Pods-ikasFit/Pods-ikasFit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,6 +83,8 @@
 				AEB19D3A21EE44FB00BE03FA /* ikasFit.entitlements */,
 				AEB19D2821EE2E3000BE03FA /* AppDelegate.swift */,
 				AEB19D2A21EE2E3000BE03FA /* ViewController.swift */,
+				AE9F9FDC21EFB22500597966 /* TablasTableViewController.swift */,
+				AEFF866221F0893C00998193 /* ListaDePasos.swift */,
 				AEB19D2C21EE2E3000BE03FA /* Main.storyboard */,
 				AEB19D2F21EE2E3600BE03FA /* Assets.xcassets */,
 				AEB19D3121EE2E3600BE03FA /* LaunchScreen.storyboard */,
@@ -240,7 +246,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				AEB19D2B21EE2E3000BE03FA /* ViewController.swift in Sources */,
+				AEFF866321F0893C00998193 /* ListaDePasos.swift in Sources */,
 				AEB19D2921EE2E3000BE03FA /* AppDelegate.swift in Sources */,
+				AE9F9FDD21EFB22500597966 /* TablasTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
