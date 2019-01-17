@@ -141,8 +141,22 @@ class ViewController: UIViewController {
                 self.labelPasos.text = "\(result)"
             }
             
+        }
+            
             // Add a new document with a generated ID
             //Fuente: https://firebase.google.com/docs/firestore/quickstart?authuser=0
+        
+        
+        db.collection("alumnos").addDocument(data: [
+            "pasos": self.labelPasos.text ?? "?"
+        ]) { err in
+            if let err = err {
+                print("Error adding document: \(err)")
+            }
+        }
+        
+        
+            /*
             
             var ref: DocumentReference? = nil
             ref = db.collection("alumnos").addDocument(data: [
@@ -158,7 +172,7 @@ class ViewController: UIViewController {
         
         
         
-    }
+    */
     
    
     }

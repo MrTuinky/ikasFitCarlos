@@ -24,14 +24,17 @@ class TablasTableViewController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
         
-        
-        
-        
-        db.collection("alumnos").getDocuments() { (querySnapshot, err) in
-            if let err = err {
-                print("Error getting documents: \(err)")
-            } else {
-                for document in querySnapshot!.documents {
+        db.collection("alumnos")
+            .addSnapshotListener { querySnapshot, error in
+                guard let documents = querySnapshot?.documents else {
+                    print("Error fetching documents: \(error!)")
+                    return
+                }
+                
+                // Vaciar el array para evitar duplicados
+                self.listas.removeAll()
+                
+                for document in documents {
                     
                     let datos = document.data()
                     let pasos = datos["pasos"] as? String ?? "?"
@@ -52,11 +55,13 @@ class TablasTableViewController: UITableViewController {
                 }
                 
                 self.tableView.reloadData()
-            }
         }
         
         
+        
     }
+    
+    
 
     // MARK: - Table view data source
 
