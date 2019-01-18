@@ -18,8 +18,14 @@ let healthStore = HKHealthStore()
 
 class ViewController: UIViewController {
     
+    var uid: String!
     
     
+    //Botón para regresar de la tabla a la vista principal
+    
+    @IBAction func volverALaVistaPrincipal(segue: UIStoryboardSegue){
+        
+    }
 
     
     
@@ -146,15 +152,23 @@ class ViewController: UIViewController {
             // Add a new document with a generated ID
             //Fuente: https://firebase.google.com/docs/firestore/quickstart?authuser=0
         
+/////////////////////////////////// AUTENTICACIÓN //////////////////////////////////////////////
+        Auth.auth().signInAnonymously() { (authResult, error) in
+            
+            
+            let uid = Auth.auth().currentUser!.uid
+            //print("Usuario: \(uid)")
+            
         
         db.collection("alumnos").addDocument(data: [
-            "pasos": self.labelPasos.text ?? "?"
+            "pasos": self.labelPasos.text ?? "?",
+            "usuario": uid
         ]) { err in
             if let err = err {
                 print("Error adding document: \(err)")
             }
         }
-        
+        }
         
             /*
             

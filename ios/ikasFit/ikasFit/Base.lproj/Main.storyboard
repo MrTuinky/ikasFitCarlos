@@ -138,9 +138,16 @@
                             <outlet property="delegate" destination="3qI-YP-wNh" id="6D6-1t-eYS"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Lista De Pasos" id="yqJ-Y0-uy6"/>
+                    <navigationItem key="navigationItem" title="Lista De Pasos" id="yqJ-Y0-uy6">
+                        <barButtonItem key="leftBarButtonItem" systemItem="done" id="QFn-Qg-9OT">
+                            <connections>
+                                <segue destination="bx4-bo-3f2" kind="unwind" unwindAction="volverALaVistaPrincipalWithSegue:" id="45X-Wn-PY5"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JxU-i6-6Lj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="bx4-bo-3f2" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1832.8" y="144.3778110944528"/>
         </scene>
