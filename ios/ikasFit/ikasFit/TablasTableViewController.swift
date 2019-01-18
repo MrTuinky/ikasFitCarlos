@@ -18,8 +18,11 @@ class TablasTableViewController: UITableViewController {
     
     var listas = [ListaDePasos]()
     
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        
         
         //let lista = ListaDePasos(titulo:"Pasos")
         
@@ -38,7 +41,54 @@ class TablasTableViewController: UITableViewController {
             
             print("Usuario: \(uid)")
             
+            db.collection("alumnos").getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    
+                    //Recuperar los datos de la lista y crear el objeto
+                    for document in querySnapshot!.documents {
+                        let  datos = document.data()
+                        let pasos = datos["pasos"] as? String ?? "?"
+                        let lista = ListaDePasos(pasos: pasos)
+                        self.listas.append(lista)
+                    }
+                    
+                    // Recargar la tabla
+                    self.tableView.reloadData()
+                }
+            }
             
+            
+            /*
+            
+            db.collection("alumnos").document(uid)
+                .addSnapshotListener { documentSnapshot, error in
+                    guard let document = documentSnapshot else {
+                        print("Error fetching document: \(error!)")
+                        return
+                    }
+                    
+                    //Limpiar el array de objetos
+                    self.listas.removeAll()
+                    
+                    //Recuperar los datos de la lista y crear el objeto
+                    let datos = document.data()
+                    let pasos = datos["pasos"] as? String ?? "?"
+                    let lista = ListaDePasos(pasos: pasos)
+                    self.listas.append(lista)
+                    
+                    
+                    // Recargar la tabla
+                    self.tableView.reloadData()
+
+                    
+                    
+            }
+            
+            */
+            
+            /*
             db.collection("alumnos").whereField("usuario", isEqualTo: uid)
                 .addSnapshotListener { querySnapshot, error in
                     guard let documents = querySnapshot?.documents else {
@@ -64,7 +114,7 @@ class TablasTableViewController: UITableViewController {
                     
             }
             
-            
+            */
             
         }
         

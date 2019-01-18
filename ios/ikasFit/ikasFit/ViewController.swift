@@ -141,6 +141,7 @@ class ViewController: UIViewController {
         
         
         
+        
         pasosDeHoy { (result) in
             print("\(result)")
             DispatchQueue.main.async {
@@ -159,7 +160,32 @@ class ViewController: UIViewController {
             let uid = Auth.auth().currentUser!.uid
             //print("Usuario: \(uid)")
             
+            
+            // Se supone que esto sirve para eliminar duplicados, pero jode todo el programa
+            // Si lo quito, funciona todo a la perfección
+            /*
+             // La cuestión es: cómo borrar documentos cuyo uid sea x (el uid del string)
+             // Hay que guardar los documentos con el nombre "uid"
+            db.collection("alumnos").document(uid).delete() { err in
+                if let err = err {
+                    print("Error removing document: \(err)")
+                }
+            }
+            
+            */
+            
+            // Add a new document in collection "cities"
+            db.collection("alumnos").document(uid).setData([
+                "pasos": self.labelPasos.text ?? "?",
+                "usuario": uid
+            ]) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                }
+            }
         
+            /*
+            
         db.collection("alumnos").addDocument(data: [
             "pasos": self.labelPasos.text ?? "?",
             "usuario": uid
@@ -168,6 +194,9 @@ class ViewController: UIViewController {
                 print("Error adding document: \(err)")
             }
         }
+            
+            */
+            
         }
         
             /*

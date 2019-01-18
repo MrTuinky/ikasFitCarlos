@@ -95,10 +95,10 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K2Z-ju-Sfo">
-                                <rect key="frame" x="128" y="526" width="106" height="71"/>
+                                <rect key="frame" x="93" y="500" width="129" height="71"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
-                                <state key="normal" title="Tabla"/>
+                                <state key="normal" title="Ranking"/>
                                 <connections>
                                     <segue destination="mVp-au-Cwh" kind="show" id="L8W-07-axd"/>
                                 </connections>

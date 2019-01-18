@@ -8,6 +8,7 @@
 
 import Foundation
 
-struct ListaDePasos {
+struct ListaDePasos{
     var pasos: String
+
 }
