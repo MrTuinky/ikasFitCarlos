@@ -17,6 +17,9 @@ class TablasTableViewController: UITableViewController {
     
     
     var listas = [ListaDePasos]()
+    var arrayPasosOrdenados = [String]()
+    
+    
     
     
     override func viewDidLoad() {
@@ -31,6 +34,8 @@ class TablasTableViewController: UITableViewController {
         
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        
+        
         
         
         Auth.auth().signInAnonymously() { (authResult, error) in
@@ -49,12 +54,21 @@ class TablasTableViewController: UITableViewController {
                     //Recuperar los datos de la lista y crear el objeto
                     for document in querySnapshot!.documents {
                         let  datos = document.data()
+                        //Si "pasos" tiene valor, obtengo el contenido, sino, aparecerá una interrogación
                         let pasos = datos["pasos"] as? String ?? "?"
                         let lista = ListaDePasos(pasos: pasos)
+                        // Append se utiliza para añadir un nuevo elemento al final de un array
                         self.listas.append(lista)
+                                            }
+                    
+                    // Ordenar y recargar la tabla
+                    // Fuente: https://www.hackingwithswift.com/example-code/arrays/how-to-sort-an-array-using-sort
+                    
+                    self.listas.sort{
+                        $0.pasos > $1.pasos
                     }
                     
-                    // Recargar la tabla
+                    
                     self.tableView.reloadData()
                 }
             }
@@ -116,6 +130,12 @@ class TablasTableViewController: UITableViewController {
             
             */
             
+        }
+        
+        func filterList(){
+            
+            self.listas.sorted(by: { $0.pasos > $1.pasos })
+            self.tableView.reloadData()
         }
         
         
