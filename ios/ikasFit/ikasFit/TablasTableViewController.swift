@@ -7,8 +7,10 @@
 //
 
 import UIKit
-
+import HealthKit
+import HealthKitUI
 import Firebase
+
 
 class TablasTableViewController: UITableViewController {
     
@@ -17,15 +19,53 @@ class TablasTableViewController: UITableViewController {
     
     
     var listas = [ListaDePasos]()
-    var arrayPasosOrdenados = [String]()
+    
+    // Lista creada para mostrar en la tabla, ya que el array ListaDePasos me da 2 errores y no consigo solucionarlos, si me da tiempo lo miro, sino dejo este apaño
+    var listas2: [String] = []
+    
+    var pasosT: String!
     
     
+    func pasosDeHoy(completion: @escaping (Double) -> Void) {
+        
+        let stepsQuantityType = HKQuantityType.quantityType(forIdentifier: .stepCount)!
+        
+        let now = Date()
+        let startOfDay = Calendar.current.startOfDay(for: now)
+        let predicate = HKQuery.predicateForSamples(withStart: startOfDay, end: now, options: .strictStartDate)
+        
+        let query = HKStatisticsQuery(quantityType: stepsQuantityType, quantitySamplePredicate: predicate, options: .cumulativeSum) { (_, result, error) in
+            var resultCount = 0.0
+            guard let result = result else {
+                
+                //En caso de que al iniciar la aplicación el usuario le de a no permitir...
+                // TODO implementar botón en los ajustes "Autorizar HealthKit"
+                
+                print("Error al obtener los pasos de healthkit (posiblemente porque no le hayan dado acceso)")
+                completion(resultCount)
+                return
+            }
+            if let sum = result.sumQuantity() {
+                resultCount = sum.doubleValue(for: HKUnit.count())
+            }
+            
+            DispatchQueue.main.async {
+                completion(resultCount)
+            }
+        }
+        healthStore.execute(query)
+    }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
+        pasosDeHoy { (result) in
+            print("\(result)")
+            DispatchQueue.main.async {
+                self.pasosT = String("\((result * 10000).rounded() / 10000)")
+            }
+        }
         
         //let lista = ListaDePasos(titulo:"Pasos")
         
@@ -56,17 +96,39 @@ class TablasTableViewController: UITableViewController {
                         let  datos = document.data()
                         //Si "pasos" tiene valor, obtengo el contenido, sino, aparecerá una interrogación
                         let pasos = datos["pasos"] as? String ?? "?"
-                        let lista = ListaDePasos(pasos: pasos)
-                        // Append se utiliza para añadir un nuevo elemento al final de un array
-                        self.listas.append(lista)
-                                            }
+                        let lista = pasos
+                        
+                        
+                        if(lista.caseInsensitiveCompare(self.pasosT ?? "?") == .orderedSame){
+                            
+                            // Append se utiliza para añadir un nuevo elemento al final de un array
+                            self.listas2.append("\(lista)  --- Yo ---")
+                            
+                            
+                        } else {
+                            
+                            
+                            self.listas2.append(lista)
+                            
+                        }
+                        
+                        
+                        
+                        // TODO Si el valor de una de las celdas de la lista coincide con el numero que hay en el label de "mis pasos de hoy" cambiar el color de la celda a verde o ponerle un "yo" al final
+                        
+                        
+                        
+                    }
                     
                     // Ordenar y recargar la tabla
                     // Fuente: https://www.hackingwithswift.com/example-code/arrays/how-to-sort-an-array-using-sort
                     
-                    self.listas.sort{
-                        $0.pasos > $1.pasos
+                    // Ordenar aray
+                    self.listas2.sort{
+                        $0 > $1
                     }
+ 
+                    
                     
                     
                     self.tableView.reloadData()
@@ -99,8 +161,21 @@ class TablasTableViewController: UITableViewController {
                     
                     
             }
+             
+             
+             
+             */
             
-            */
+            
+            
+            
+             
+            
+            
+            
+             
+            
+            
             
             /*
             db.collection("alumnos").whereField("usuario", isEqualTo: uid)
@@ -130,13 +205,11 @@ class TablasTableViewController: UITableViewController {
             
             */
             
-        }
+        } // Fin auth
         
-        func filterList(){
-            
-            self.listas.sorted(by: { $0.pasos > $1.pasos })
-            self.tableView.reloadData()
-        }
+        
+        
+        
         
         
         
@@ -153,7 +226,7 @@ class TablasTableViewController: UITableViewController {
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete implementation, return the number of rows
-        return listas.count
+        return listas2.count
     }
     
     
@@ -163,7 +236,7 @@ class TablasTableViewController: UITableViewController {
         // el identificador de Table View Cell
         // Configure the cell...
         
-        cell.textLabel?.text = listas[indexPath.row].pasos
+        cell.textLabel?.text = listas2[indexPath.row]
         
         return cell
     }

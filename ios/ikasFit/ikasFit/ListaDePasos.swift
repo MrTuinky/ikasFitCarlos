@@ -11,4 +11,5 @@ import Foundation
 struct ListaDePasos{
     var pasos: String
     
+    
 }

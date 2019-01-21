@@ -21,6 +21,8 @@ class ViewController: UIViewController {
     var uid: String!
     
     
+    
+    
     //Botón para regresar de la tabla a la vista principal
     
     @IBAction func volverALaVistaPrincipal(segue: UIStoryboardSegue){
@@ -38,7 +40,8 @@ class ViewController: UIViewController {
         pasosDeHoy { (result) in
             print("\(result)")
             DispatchQueue.main.async {
-                self.labelPasos.text = "\(result)"
+                // Redondeo porque sino al dar muchos pasos me sube tropeciontos decimaes y en un iPhone de pantalla pequeña no caben tantos decimales.
+                self.labelPasos.text = "\((result * 10000).rounded() / 10000)"
             }
         }
         
@@ -48,7 +51,7 @@ class ViewController: UIViewController {
     }
     
     
-    //Botón para ir a Salud y activar que deje leer los pasos
+    //Botón para ir a Salud del iPhone y activar que deje leer los pasos
     //Fuente https://stackoverflow.com/questions/28152526/how-do-i-open-phone-settings-when-a-button-is-clicked/52103305
     
     
@@ -67,7 +70,7 @@ class ViewController: UIViewController {
                 
                 if UIApplication.shared.canOpenURL(settingsUrl) {
                     UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                        print("Ajstes abiertos: \(success)") // Prints true
+                        print("Ajustes abiertos: \(success)") // Prints true
                     })
                 }
             }
@@ -116,7 +119,7 @@ class ViewController: UIViewController {
             guard let result = result else {
                 
                 //En caso de que al iniciar la aplicación el usuario le de a no permitir...
-                // TODO implementar botón en los ajustes "Autorizar HealthKit"
+                // TODO que elboton de ajustes redirija directamente a "Salud"
                 
                 print("Error al obtener los pasos de healthkit (posiblemente porque no le hayan dado acceso)")
                 completion(resultCount)
@@ -145,7 +148,8 @@ class ViewController: UIViewController {
         pasosDeHoy { (result) in
             print("\(result)")
             DispatchQueue.main.async {
-                self.labelPasos.text = "\(result)"
+                self.labelPasos.text = "\((result * 10000).rounded() / 10000)"
+                
             }
             
         }
@@ -183,6 +187,9 @@ class ViewController: UIViewController {
                     print("Error writing document: \(err)")
                 }
             }
+            
+            
+            
         
             /*
             
@@ -198,6 +205,11 @@ class ViewController: UIViewController {
             */
             
         }
+        
+        
+        
+        
+        
         
             /*
             
@@ -216,6 +228,8 @@ class ViewController: UIViewController {
         
         
     */
+        
+        
     
    
     }
