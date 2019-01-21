@@ -26,6 +26,7 @@ class TablasTableViewController: UITableViewController {
     var pasosT: String!
     
     
+    
     func pasosDeHoy(completion: @escaping (Double) -> Void) {
         
         let stepsQuantityType = HKQuantityType.quantityType(forIdentifier: .stepCount)!
@@ -102,7 +103,9 @@ class TablasTableViewController: UITableViewController {
                         if(lista.caseInsensitiveCompare(self.pasosT ?? "?") == .orderedSame){
                             
                             // Append se utiliza para añadir un nuevo elemento al final de un array
+                            
                             self.listas2.append("\(lista)  --- Yo ---")
+                            
                             
                             
                         } else {
@@ -127,9 +130,12 @@ class TablasTableViewController: UITableViewController {
                     self.listas2.sort{
                         $0 > $1
                     }
+                    
+                    
+                    
+                    
  
-                    
-                    
+                
                     
                     self.tableView.reloadData()
                 }

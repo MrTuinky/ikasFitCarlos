@@ -20,7 +20,9 @@ class ViewController: UIViewController {
     
     var uid: String!
     
+    var listas22: [String] = []
     
+    var pasosT: String!
     
     
     //Botón para regresar de la tabla a la vista principal
@@ -44,6 +46,8 @@ class ViewController: UIViewController {
                 self.labelPasos.text = "\((result * 10000).rounded() / 10000)"
             }
         }
+        
+        
         
         
         
@@ -137,6 +141,8 @@ class ViewController: UIViewController {
     }
     
     
+    @IBOutlet weak var labelPosicionClase: UILabel!
+    
     
     @IBOutlet weak var labelPasos: UILabel!
     
@@ -165,20 +171,8 @@ class ViewController: UIViewController {
             //print("Usuario: \(uid)")
             
             
-            // Se supone que esto sirve para eliminar duplicados, pero jode todo el programa
-            // Si lo quito, funciona todo a la perfección
-            /*
-             // La cuestión es: cómo borrar documentos cuyo uid sea x (el uid del string)
-             // Hay que guardar los documentos con el nombre "uid"
-            db.collection("alumnos").document(uid).delete() { err in
-                if let err = err {
-                    print("Error removing document: \(err)")
-                }
-            }
             
-            */
-            
-            // Add a new document in collection "cities"
+            // Añadir un nuevo documento en la colección "Alumnos"
             db.collection("alumnos").document(uid).setData([
                 "pasos": self.labelPasos.text ?? "?",
                 "usuario": uid
@@ -189,45 +183,66 @@ class ViewController: UIViewController {
             }
             
             
+            // A continuación creo codigo para llenar el label de posición de la clase (2/10)
             
-        
-            /*
-            
-        db.collection("alumnos").addDocument(data: [
-            "pasos": self.labelPasos.text ?? "?",
-            "usuario": uid
-        ]) { err in
-            if let err = err {
-                print("Error adding document: \(err)")
-            }
-        }
-            
-            */
-            
-        }
-        
-        
-        
-        
-        
-        
-            /*
-            
-            var ref: DocumentReference? = nil
-            ref = db.collection("alumnos").addDocument(data: [
-                "pasos": self.labelPasos.text
-                
-            ]) { err in
+            db.collection("alumnos").getDocuments() { (querySnapshot, err) in
                 if let err = err {
-                    print("Error adding document: \(err)")
+                    print("Error getting documents: \(err)")
                 } else {
-                    print("Document added with ID: \(ref!.documentID)")
+                    
+                    //Recuperar los datos de la lista y crear el objeto
+                    for document in querySnapshot!.documents {
+                        let  datos = document.data()
+                        //Si "pasos" tiene valor, obtengo el contenido, sino, aparecerá una interrogación
+                        let pasos = datos["pasos"] as? String ?? "?"
+                        let lista = pasos
+                        self.listas22.append(lista)
+                        
+                        
+                    }
+                    
+                    // Ordenar y recargar la tabla
+                    // Fuente: https://www.hackingwithswift.com/example-code/arrays/how-to-sort-an-array-using-sort
+                    
+                    // Ordenar aray
+                    self.listas22.sort{
+                        $0 > $1
+                    }
+                    
+                    for i in 0 ..< self.listas22.count {
+                        
+                        
+                        if(self.listas22[i].caseInsensitiveCompare(self.labelPasos.text ?? "?")  == .orderedSame){
+                            
+                            print("zizizi")
+                            
+                            self.labelPosicionClase.text = "\(i + 1) / \(self.listas22.count)"
+                            
+                        }
+                        
+                        print("Episode \(i + 1): \(self.listas22[i])")
+                        
+                    }
+                    
+                    self.listas22.removeAll()
+                    
+                    
+                    
                 }
             }
+            
+            
+            
+        
+            
+            
+        }
         
         
         
-    */
+        
+        
+    
         
         
     
