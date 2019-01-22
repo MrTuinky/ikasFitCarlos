@@ -97,20 +97,22 @@ class TablasTableViewController: UITableViewController {
                         let  datos = document.data()
                         //Si "pasos" tiene valor, obtengo el contenido, sino, aparecerá una interrogación
                         let pasos = datos["pasos"] as? String ?? "?"
+                        let clase = datos["clase"] as? String ?? "?"
                         let lista = pasos
+                        let lista2 = clase
                         
                         
                         if(lista.caseInsensitiveCompare(self.pasosT ?? "?") == .orderedSame){
                             
                             // Append se utiliza para añadir un nuevo elemento al final de un array
-                            self.listas2.append("\(lista)  --- Yo ---")
+                            self.listas2.append("Pasos: \(lista) Clase: \(lista2) --- Yo ---")
                             
                             // TODO Además de poner --- Yo --- cambiar el color de la celda a verde
                             
                         } else {
                             
                             
-                            self.listas2.append(lista)
+                            self.listas2.append("Pasos: \(lista) Clase: \(lista2)")
                             
                         }
                         
@@ -127,7 +129,7 @@ class TablasTableViewController: UITableViewController {
                     
                     // Ordenar aray
                     self.listas2.sort{
-                        $0 > $1
+                        $0 < $1
                     }
                     
                     

@@ -197,7 +197,8 @@ class ViewController: UIViewController {
             // Añadir un nuevo documento en la colección "Clase"
             db.collection(self.finalClase).document(uid).setData([
                 "pasos": self.labelPasos.text ?? "?",
-                "usuario": uid
+                "usuario": uid,
+                "clase": self.finalClase
             ]) { err in
                 if let err = err {
                     print("Error writing document: \(err)")
@@ -228,7 +229,7 @@ class ViewController: UIViewController {
                     
                     // Ordenar aray
                     self.listasClase.sort{
-                        $0 > $1
+                        $0 < $1
                     }
                     
                     for i in 0 ..< self.listasClase.count {
@@ -279,7 +280,7 @@ class ViewController: UIViewController {
                     
                     // Ordenar aray
                     self.listasGlobal.sort{
-                        $0 > $1
+                        $0 < $1
                     }
                     
                     for i in 0 ..< self.listasGlobal.count {
