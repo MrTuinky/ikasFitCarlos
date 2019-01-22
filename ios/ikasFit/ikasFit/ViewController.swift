@@ -20,24 +20,28 @@ class ViewController: UIViewController {
     
     var uid: String!
     
-    var listas22: [String] = []
+    var listasGlobal: [String] = []
+    var listasClase: [String] = []
     
     var pasosT: String!
     
+    @IBOutlet weak var labelClase: UILabel!
+     var finalClase = ""
     
     //Botón para regresar de la tabla a la vista principal
     
     @IBAction func volverALaVistaPrincipal(segue: UIStoryboardSegue){
         
     }
-
+    
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        autorizar()
         
+        
+        autorizar()
         
         pasosDeHoy { (result) in
             print("\(result)")
@@ -47,7 +51,7 @@ class ViewController: UIViewController {
             }
         }
         
-        
+        self.labelClase.text = self.finalClase
         
         
         
@@ -60,29 +64,29 @@ class ViewController: UIViewController {
     
     
     @IBAction func botonAjustes(_ sender: Any) {
-    
-    //UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
+        
+        //UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
         
         
         let alertController = UIAlertController (title: "Autorizar", message: "¿Quieres que la aplicación abra los Ajustes del iPhone?", preferredStyle: .alert)
+        
+        let settingsAction = UIAlertAction(title: "Ajustes", style: .default) { (_) -> Void in
             
-            let settingsAction = UIAlertAction(title: "Ajustes", style: .default) { (_) -> Void in
-                
-                guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
-                    return
-                }
-                
-                if UIApplication.shared.canOpenURL(settingsUrl) {
-                    UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
-                        print("Ajustes abiertos: \(success)") // Prints true
-                    })
-                }
+            guard let settingsUrl = URL(string: UIApplication.openSettingsURLString) else {
+                return
             }
-            alertController.addAction(settingsAction)
-            let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel, handler: nil)
-            alertController.addAction(cancelAction)
             
-            present(alertController, animated: true, completion: nil)
+            if UIApplication.shared.canOpenURL(settingsUrl) {
+                UIApplication.shared.open(settingsUrl, completionHandler: { (success) in
+                    print("Ajustes abiertos: \(success)") // Prints true
+                })
+            }
+        }
+        alertController.addAction(settingsAction)
+        let cancelAction = UIAlertAction(title: "Cancelar", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
         
         
     }
@@ -103,7 +107,7 @@ class ViewController: UIViewController {
         }
         
         
-
+        
         
     }
     
@@ -125,6 +129,9 @@ class ViewController: UIViewController {
                 //En caso de que al iniciar la aplicación el usuario le de a no permitir...
                 // TODO que elboton de ajustes redirija directamente a "Salud"
                 
+                
+                
+                
                 print("Error al obtener los pasos de healthkit (posiblemente porque no le hayan dado acceso)")
                 completion(resultCount)
                 return
@@ -141,7 +148,11 @@ class ViewController: UIViewController {
     }
     
     
+    
     @IBOutlet weak var labelPosicionClase: UILabel!
+    
+ 
+    @IBOutlet weak var labelPosicionGlobal: UILabel!
     
     
     @IBOutlet weak var labelPasos: UILabel!
@@ -159,11 +170,11 @@ class ViewController: UIViewController {
             }
             
         }
-            
-            // Add a new document with a generated ID
-            //Fuente: https://firebase.google.com/docs/firestore/quickstart?authuser=0
         
-/////////////////////////////////// AUTENTICACIÓN //////////////////////////////////////////////
+        // Add a new document with a generated ID
+        //Fuente: https://firebase.google.com/docs/firestore/quickstart?authuser=0
+        
+        /////////////////////////////////// AUTENTICACIÓN //////////////////////////////////////////////
         Auth.auth().signInAnonymously() { (authResult, error) in
             
             
@@ -172,8 +183,19 @@ class ViewController: UIViewController {
             
             
             
-            // Añadir un nuevo documento en la colección "Alumnos"
+            // Añadir un nuevo documento en la colección "Alumnos", que es la que engloba todas las clases
             db.collection("alumnos").document(uid).setData([
+                "pasos": self.labelPasos.text ?? "?",
+                "usuario": uid,
+                "clase": self.finalClase
+            ]) { err in
+                if let err = err {
+                    print("Error writing document: \(err)")
+                }
+            }
+            
+            // Añadir un nuevo documento en la colección "Clase"
+            db.collection(self.finalClase).document(uid).setData([
                 "pasos": self.labelPasos.text ?? "?",
                 "usuario": uid
             ]) { err in
@@ -183,7 +205,58 @@ class ViewController: UIViewController {
             }
             
             
-            // A continuación creo codigo para llenar el label de posición de la clase (2/10)
+            // A continuación creo codigo para llenar el label de posición de la clase (2/30)
+            
+            db.collection(self.finalClase).getDocuments() { (querySnapshot, err) in
+                if let err = err {
+                    print("Error getting documents: \(err)")
+                } else {
+                    
+                    //Recuperar los datos de la lista y crear el objeto
+                    for document in querySnapshot!.documents {
+                        let  datos = document.data()
+                        //Si "pasos" tiene valor, obtengo el contenido, si no, aparecerá una interrogación
+                        let pasos = datos["pasos"] as? String ?? "?"
+                        let lista = pasos
+                        self.listasClase.append(lista)
+                        
+                        
+                    }
+                    
+                    // Ordenar y recargar la tabla
+                    // Fuente: https://www.hackingwithswift.com/example-code/arrays/how-to-sort-an-array-using-sort
+                    
+                    // Ordenar aray
+                    self.listasClase.sort{
+                        $0 > $1
+                    }
+                    
+                    for i in 0 ..< self.listasClase.count {
+                        
+                        
+                        if(self.listasClase[i].caseInsensitiveCompare(self.labelPasos.text ?? "?")  == .orderedSame){
+                            
+                            
+                            
+                            self.labelPosicionClase.text = "\(i + 1) / \(self.listasClase.count)"
+                            
+                        }
+                        
+                        print("Posición \(i + 1): \(self.listasClase[i])")
+                        
+                    }
+                    
+                    self.listasClase.removeAll()
+                    
+                    
+                    
+                }
+            }
+            
+            
+            
+            
+            // A continuación creo codigo para llenar el label de posición global (2/1000)
             
             db.collection("alumnos").getDocuments() { (querySnapshot, err) in
                 if let err = err {
@@ -193,10 +266,10 @@ class ViewController: UIViewController {
                     //Recuperar los datos de la lista y crear el objeto
                     for document in querySnapshot!.documents {
                         let  datos = document.data()
-                        //Si "pasos" tiene valor, obtengo el contenido, sino, aparecerá una interrogación
+                        //Si "pasos" tiene valor, obtengo el contenido, si no, aparecerá una interrogación
                         let pasos = datos["pasos"] as? String ?? "?"
                         let lista = pasos
-                        self.listas22.append(lista)
+                        self.listasGlobal.append(lista)
                         
                         
                     }
@@ -205,26 +278,26 @@ class ViewController: UIViewController {
                     // Fuente: https://www.hackingwithswift.com/example-code/arrays/how-to-sort-an-array-using-sort
                     
                     // Ordenar aray
-                    self.listas22.sort{
+                    self.listasGlobal.sort{
                         $0 > $1
                     }
                     
-                    for i in 0 ..< self.listas22.count {
+                    for i in 0 ..< self.listasGlobal.count {
                         
                         
-                        if(self.listas22[i].caseInsensitiveCompare(self.labelPasos.text ?? "?")  == .orderedSame){
+                        if(self.listasGlobal[i].caseInsensitiveCompare(self.labelPasos.text ?? "?")  == .orderedSame){
                             
-                            print("zizizi")
                             
-                            self.labelPosicionClase.text = "\(i + 1) / \(self.listas22.count)"
+                            
+                            self.labelPosicionGlobal.text = "\(i + 1) / \(self.listasGlobal.count)"
                             
                         }
                         
-                        print("Episode \(i + 1): \(self.listas22[i])")
+                        print("Posición \(i + 1): \(self.listasGlobal[i])")
                         
                     }
                     
-                    self.listas22.removeAll()
+                    self.listasGlobal.removeAll()
                     
                     
                     
@@ -233,7 +306,7 @@ class ViewController: UIViewController {
             
             
             
-        
+            
             
             
         }
@@ -242,11 +315,11 @@ class ViewController: UIViewController {
         
         
         
-    
         
         
-    
-   
+        
+        
+        
     }
     
     
@@ -255,7 +328,7 @@ class ViewController: UIViewController {
     
     
 }
-    
+
 
 
 

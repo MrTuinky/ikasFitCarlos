@@ -16,6 +16,7 @@
 		AEB19D3021EE2E3600BE03FA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AEB19D2F21EE2E3600BE03FA /* Assets.xcassets */; };
 		AEB19D3321EE2E3600BE03FA /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AEB19D3121EE2E3600BE03FA /* LaunchScreen.storyboard */; };
 		AEB19D3F21EE588500BE03FA /* HealthKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AEB19D3E21EE588500BE03FA /* HealthKit.framework */; };
+		AED543C821F72DA80050A7AD /* PrimerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AED543C721F72DA80050A7AD /* PrimerViewController.swift */; };
 		AEFF866321F0893C00998193 /* ListaDePasos.swift in Sources */ = {isa = PBXBuildFile; fileRef = AEFF866221F0893C00998193 /* ListaDePasos.swift */; };
 /* End PBXBuildFile section */
 
@@ -33,6 +34,7 @@
 		AEB19D3421EE2E3600BE03FA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AEB19D3A21EE44FB00BE03FA /* ikasFit.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ikasFit.entitlements; sourceTree = "<group>"; };
 		AEB19D3E21EE588500BE03FA /* HealthKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = HealthKit.framework; path = System/Library/Frameworks/HealthKit.framework; sourceTree = SDKROOT; };
+		AED543C721F72DA80050A7AD /* PrimerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimerViewController.swift; sourceTree = "<group>"; };
 		AEFF866221F0893C00998193 /* ListaDePasos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListaDePasos.swift; sourceTree = "<group>"; };
 		F239554E3F1929BDCE5A65C9 /* Pods-ikasFit.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ikasFit.release.xcconfig"; path = "Pods/Target Support Files/Pods-ikasFit/Pods-ikasFit.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -82,6 +84,7 @@
 			children = (
 				AEB19D3A21EE44FB00BE03FA /* ikasFit.entitlements */,
 				AEB19D2821EE2E3000BE03FA /* AppDelegate.swift */,
+				AED543C721F72DA80050A7AD /* PrimerViewController.swift */,
 				AEB19D2A21EE2E3000BE03FA /* ViewController.swift */,
 				AE9F9FDC21EFB22500597966 /* TablasTableViewController.swift */,
 				AEFF866221F0893C00998193 /* ListaDePasos.swift */,
@@ -115,6 +118,7 @@
 				AEB19D2221EE2E3000BE03FA /* Frameworks */,
 				AEB19D2321EE2E3000BE03FA /* Resources */,
 				E1F47DB6FC0FF8C06A34C76D /* [CP] Embed Pods Frameworks */,
+				FDCB2F40B42E56009D5E2AFF /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -211,12 +215,10 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-ikasFit/Pods-ikasFit-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/BoringSSL/openssl.framework",
 				"${BUILT_PRODUCTS_DIR}/GTMSessionFetcher/GTMSessionFetcher.framework",
-				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
+				"${BUILT_PRODUCTS_DIR}/GoogleUtilities/GoogleUtilities.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC/GRPCClient.framework",
+				"${BUILT_PRODUCTS_DIR}/gRPC-C++/grpcpp.framework",
 				"${BUILT_PRODUCTS_DIR}/gRPC-Core/grpc.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-ProtoRPC/ProtoRPC.framework",
-				"${BUILT_PRODUCTS_DIR}/gRPC-RxLibrary/RxLibrary.framework",
 				"${BUILT_PRODUCTS_DIR}/leveldb-library/leveldb.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -226,18 +228,38 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/openssl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GTMSessionFetcher.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleUtilities.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GRPCClient.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpcpp.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/grpc.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ProtoRPC.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RxLibrary.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/leveldb.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ikasFit/Pods-ikasFit-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FDCB2F40B42E56009D5E2AFF /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${SRCROOT}/Pods/Target Support Files/Pods-ikasFit/Pods-ikasFit-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/FirebaseFirestore/gRPCCertificates-Firestore.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/gRPCCertificates-Firestore.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ikasFit/Pods-ikasFit-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -250,6 +272,7 @@
 				AEB19D2B21EE2E3000BE03FA /* ViewController.swift in Sources */,
 				AEFF866321F0893C00998193 /* ListaDePasos.swift in Sources */,
 				AEB19D2921EE2E3000BE03FA /* AppDelegate.swift in Sources */,
+				AED543C821F72DA80050A7AD /* PrimerViewController.swift in Sources */,
 				AE9F9FDD21EFB22500597966 /* TablasTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

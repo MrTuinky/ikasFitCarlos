@@ -68,7 +68,7 @@ class TablasTableViewController: UITableViewController {
             }
         }
         
-        //let lista = ListaDePasos(titulo:"Pasos")
+        
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -103,10 +103,9 @@ class TablasTableViewController: UITableViewController {
                         if(lista.caseInsensitiveCompare(self.pasosT ?? "?") == .orderedSame){
                             
                             // Append se utiliza para añadir un nuevo elemento al final de un array
-                            
                             self.listas2.append("\(lista)  --- Yo ---")
                             
-                            
+                            // TODO Además de poner --- Yo --- cambiar el color de la celda a verde
                             
                         } else {
                             
@@ -117,7 +116,7 @@ class TablasTableViewController: UITableViewController {
                         
                         
                         
-                        // TODO Si el valor de una de las celdas de la lista coincide con el numero que hay en el label de "mis pasos de hoy" cambiar el color de la celda a verde o ponerle un "yo" al final
+                        
                         
                         
                         
@@ -133,83 +132,13 @@ class TablasTableViewController: UITableViewController {
                     
                     
                     
-                    
- 
-                
-                    
                     self.tableView.reloadData()
+                    
                 }
             }
             
             
-            /*
             
-            db.collection("alumnos").document(uid)
-                .addSnapshotListener { documentSnapshot, error in
-                    guard let document = documentSnapshot else {
-                        print("Error fetching document: \(error!)")
-                        return
-                    }
-                    
-                    //Limpiar el array de objetos
-                    self.listas.removeAll()
-                    
-                    //Recuperar los datos de la lista y crear el objeto
-                    let datos = document.data()
-                    let pasos = datos["pasos"] as? String ?? "?"
-                    let lista = ListaDePasos(pasos: pasos)
-                    self.listas.append(lista)
-                    
-                    
-                    // Recargar la tabla
-                    self.tableView.reloadData()
-
-                    
-                    
-            }
-             
-             
-             
-             */
-            
-            
-            
-            
-             
-            
-            
-            
-             
-            
-            
-            
-            /*
-            db.collection("alumnos").whereField("usuario", isEqualTo: uid)
-                .addSnapshotListener { querySnapshot, error in
-                    guard let documents = querySnapshot?.documents else {
-                        print("Error fetching documents: \(error!)")
-                        return
-                    }
-                    
-                    //Limpiar el array de objetos
-                    self.listas.removeAll()
-                    
-                    for document in documents {
-                        //Recuperar los datos de la lista y crear el objeto
-                        let datos = document.data()
-                        let pasos = datos["pasos"] as? String ?? "?"
-                        let lista = ListaDePasos(pasos: pasos)
-                        self.listas.append(lista)
-                    }
-                    
-                    
-                    // Recargar la tabla
-                    self.tableView.reloadData()
-                    
-                    
-            }
-            
-            */
             
         } // Fin auth
         
