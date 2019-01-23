@@ -17,6 +17,11 @@ class PrimerViewController: UIViewController, UITextFieldDelegate {
     var nombreClase1 = ""
     
     
+    // TODO:
+    // Cambiar color de fila del tableviewcontroller en el que estoy
+    // Hacer que todos los días se borren los datos de firestore
+    // Hacer un label que ponga: Ganador de pasos de la semana: "Clase: 222"
+    // Autenticar con facebook
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,10 +42,27 @@ class PrimerViewController: UIViewController, UITextFieldDelegate {
     }
     
     
+    
     @IBAction func botonComenzar(_ sender: Any) {
+        
+        // TODO Añadir un listener...
+        if(textNombreClase.text?.isEmpty ?? true){
+            
+            let alert = UIAlertController(title: "¡Ups!", message: "Debes escribir el nombre o número de tu clase antes de comenzar.", preferredStyle: .alert)
+            
+            alert.addAction(UIAlertAction(title: "Aceptar", style: .default, handler: nil))
+            
+            self.present(alert, animated: true)
+            
+        } else {
+            
+            
         
         self.nombreClase1 = textNombreClase.text!
         performSegue(withIdentifier: "nombreClaseIdentificador", sender: self)
+        
+        }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
