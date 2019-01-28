@@ -25,6 +25,8 @@ class ViewController: UIViewController {
     
     var pasosT: String!
     
+   
+    
     @IBOutlet weak var labelClase: UILabel!
      var finalClase = ""
     
@@ -47,7 +49,10 @@ class ViewController: UIViewController {
             print("\(result)")
             DispatchQueue.main.async {
                 // Redondeo porque sino al dar muchos pasos me sube tropeciontos decimaes y en un iPhone de pantalla pequeña no caben tantos decimales.
-                self.labelPasos.text = "\((result * 10000).rounded() / 10000)"
+                // No hacen falta decimales
+                
+                
+                self.labelPasos.text = "\(floor(result))"
             }
         }
         
@@ -68,7 +73,7 @@ class ViewController: UIViewController {
         //UIApplication.shared.open(URL(string: UIApplication.openSettingsURLString)!)
         
         
-        let alertController = UIAlertController (title: "Autorizar", message: "¿Quieres que la aplicación abra los Ajustes del iPhone?", preferredStyle: .alert)
+        let alertController = UIAlertController (title: "Autorizar", message: "¿Deseas que la aplicación abra los Ajustes del iPhone?", preferredStyle: .alert)
         
         let settingsAction = UIAlertAction(title: "Ajustes", style: .default) { (_) -> Void in
             

@@ -17,14 +17,19 @@ class PrimerViewController: UIViewController, UITextFieldDelegate {
     var nombreClase1 = ""
     
     
+    @IBOutlet weak var botonC: UIButton!
+    
     // TODO:
+    // Hacer que cuando los ajustes del iPhone se abran, se habra en salud
     // Cambiar color de fila del tableviewcontroller en el que estoy
-    // Hacer que todos los días se borren los datos de firestore
-    // Hacer un label que ponga: Ganador de pasos de la semana: "Clase: 222"
-    // Autenticar con facebook
+    // Hacer que todos los días se borren los datos de firestore o hacer un asegunda subdivisión por fecha
+    // TODO Hacer un label que ponga: Ganador de pasos de la semana: "Clase: 222"
+    // TODO Autenticar con facebook
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        botonC.layer.cornerRadius = 10
         
         textNombreClase.delegate = self
 
