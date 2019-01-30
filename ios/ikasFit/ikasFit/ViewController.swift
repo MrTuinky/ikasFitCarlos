@@ -194,10 +194,7 @@ class ViewController: UIViewController {
             
             // Añadir un nuevo documento en la colección "Alumnos", que es la que engloba todas las clases
             
-            // Si ha dado 0 pasos, no añadir a la base de datos
-            if(self.pasosT.caseInsensitiveCompare("0.0") == .orderedSame){
-                
-            } else {
+            
                 
                 db.collection("alumnos").document(uid).setData([
                     "pasos": self.labelPasos.text ?? "?",
@@ -209,16 +206,13 @@ class ViewController: UIViewController {
                     }
                 }
                 
-            }
+            
             
             
             
             // Añadir un nuevo documento en la colección "Clase"
             
-            // Si ha dado 0 pasos, no añadir a la base de datos
-            if(self.pasosT.caseInsensitiveCompare("0.0") == .orderedSame){
-                
-            } else {
+            
                 
                 db.collection(self.finalClase).document(uid).setData([
                     "pasos": self.labelPasos.text ?? "?",
@@ -229,7 +223,7 @@ class ViewController: UIViewController {
                         print("Error writing document: \(err)")
                     }
                 }
-            }
+            
             
             
             // A continuación creo codigo para llenar el label de posición de la clase (2/30)
@@ -255,7 +249,7 @@ class ViewController: UIViewController {
                     
                     // Ordenar aray
                     self.listasClase.sort{
-                        $0 < $1
+                        $0 > $1
                     }
                     
                     for i in 0 ..< self.listasClase.count {
@@ -307,7 +301,7 @@ class ViewController: UIViewController {
                     
                     // Ordenar aray
                     self.listasGlobal.sort{
-                        $0 < $1
+                        $0 > $1
                     }
                     
                     for i in 0 ..< self.listasGlobal.count {

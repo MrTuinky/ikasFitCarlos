@@ -128,7 +128,7 @@ class TablasTableViewController: UITableViewController {
                     
                     // Ordenar aray
                     self.listas2.sort{
-                        $0 < $1
+                        $0 > $1
                     }
                     
                     
