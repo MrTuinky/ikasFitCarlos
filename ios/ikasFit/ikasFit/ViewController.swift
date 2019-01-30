@@ -25,10 +25,10 @@ class ViewController: UIViewController {
     
     var pasosT: String!
     
-   
+    
     
     @IBOutlet weak var labelClase: UILabel!
-     var finalClase = ""
+    var finalClase = ""
     
     //Botón para regresar de la tabla a la vista principal
     
@@ -156,7 +156,7 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var labelPosicionClase: UILabel!
     
- 
+    
     @IBOutlet weak var labelPosicionGlobal: UILabel!
     
     
@@ -174,7 +174,11 @@ class ViewController: UIViewController {
                 
             }
             
+            
+            
         }
+        
+        self.pasosT = self.labelPasos.text ?? "?"
         
         // Add a new document with a generated ID
         //Fuente: https://firebase.google.com/docs/firestore/quickstart?authuser=0
@@ -189,24 +193,41 @@ class ViewController: UIViewController {
             
             
             // Añadir un nuevo documento en la colección "Alumnos", que es la que engloba todas las clases
-            db.collection("alumnos").document(uid).setData([
-                "pasos": self.labelPasos.text ?? "?",
-                "usuario": uid,
-                "clase": self.finalClase
-            ]) { err in
-                if let err = err {
-                    print("Error writing document: \(err)")
+            
+            // Si ha dado 0 pasos, no añadir a la base de datos
+            if(self.pasosT.caseInsensitiveCompare("0.0") == .orderedSame){
+                
+            } else {
+                
+                db.collection("alumnos").document(uid).setData([
+                    "pasos": self.labelPasos.text ?? "?",
+                    "usuario": uid,
+                    "clase": self.finalClase
+                ]) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    }
                 }
+                
             }
             
+            
+            
             // Añadir un nuevo documento en la colección "Clase"
-            db.collection(self.finalClase).document(uid).setData([
-                "pasos": self.labelPasos.text ?? "?",
-                "usuario": uid,
-                "clase": self.finalClase
-            ]) { err in
-                if let err = err {
-                    print("Error writing document: \(err)")
+            
+            // Si ha dado 0 pasos, no añadir a la base de datos
+            if(self.pasosT.caseInsensitiveCompare("0.0") == .orderedSame){
+                
+            } else {
+                
+                db.collection(self.finalClase).document(uid).setData([
+                    "pasos": self.labelPasos.text ?? "?",
+                    "usuario": uid,
+                    "clase": self.finalClase
+                ]) { err in
+                    if let err = err {
+                        print("Error writing document: \(err)")
+                    }
                 }
             }
             
@@ -245,6 +266,7 @@ class ViewController: UIViewController {
                             
                             
                             self.labelPosicionClase.text = "\(i + 1) / \(self.listasClase.count)"
+                            
                             
                         }
                         
@@ -296,6 +318,7 @@ class ViewController: UIViewController {
                             
                             
                             self.labelPosicionGlobal.text = "\(i + 1) / \(self.listasGlobal.count)"
+                            
                             
                         }
                         

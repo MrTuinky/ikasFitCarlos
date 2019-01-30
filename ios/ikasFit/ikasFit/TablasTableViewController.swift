@@ -100,10 +100,6 @@ class TablasTableViewController: UITableViewController {
                         let clase = datos["clase"] as? String ?? "?"
                         let usuario = datos["usuario"] as? String ?? "?"
                         
-                        // Si ha dado 0 pasos, no añadir a la lista
-                        if(pasos.caseInsensitiveCompare("0.0") == .orderedSame){
-                            
-                        } else {
                         
                         if(uid.caseInsensitiveCompare(usuario) == .orderedSame){
                             
@@ -119,7 +115,7 @@ class TablasTableViewController: UITableViewController {
                             
                         }
                         
-                        }
+                        
                     
                         
                         
