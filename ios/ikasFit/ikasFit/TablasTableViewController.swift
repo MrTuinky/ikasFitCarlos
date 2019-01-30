@@ -63,8 +63,10 @@ class TablasTableViewController: UITableViewController {
         
         pasosDeHoy { (result) in
             print("\(result)")
+            
+            let miInt = Int(result)
             DispatchQueue.main.async {
-                self.pasosT = String("\(floor(result))")
+                self.pasosT = String("\(miInt)")
             }
         }
         

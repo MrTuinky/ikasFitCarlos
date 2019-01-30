@@ -47,12 +47,15 @@ class ViewController: UIViewController {
         
         pasosDeHoy { (result) in
             print("\(result)")
+            
+            // Redondeo porque sino al dar muchos pasos me sube tropeciontos decimaes y en un iPhone de pantalla pequeña no caben tantos decimales.
+            // No hacen falta decimales
+            let miInt = Int(result)
             DispatchQueue.main.async {
-                // Redondeo porque sino al dar muchos pasos me sube tropeciontos decimaes y en un iPhone de pantalla pequeña no caben tantos decimales.
-                // No hacen falta decimales
                 
                 
-                self.labelPasos.text = "\(floor(result))"
+                
+                self.labelPasos.text = "\(miInt)"
             }
         }
         
@@ -169,8 +172,10 @@ class ViewController: UIViewController {
         
         pasosDeHoy { (result) in
             print("\(result)")
+            
+            let miInt = Int(result)
             DispatchQueue.main.async {
-                self.labelPasos.text = "\((result * 10000).rounded() / 10000)"
+                self.labelPasos.text = "\(miInt)"
                 
             }
             
