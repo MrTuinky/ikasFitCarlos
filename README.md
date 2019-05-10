@@ -1,5 +1,5 @@
 # ikasFitCarlos
-Proyecto creado por Carlos Hernández (propuesto por Ion Jaureguialzo) como trabajo de fin de Grado 2019. El proyecto está realizado con Xcode en la versión de Swift 4.2 y consiste en una aplicación para el iPhone combinando Firebase con HealthKit.
+Proyecto creado por Carlos Hernández como trabajo de fin de Grado 2019. El proyecto está realizado con Xcode en la versión de Swift 4.2 y consiste en una aplicación para el iPhone combinando Firebase con HealthKit.
 Está diseñada para los diferentes tipos de pantalla de iPhone que actualmente hay en el mercado y soportan iOS 11.0 o posterior.
 
 (aquí foto iP5S)
